@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdallah Jeradi</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('backg.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: sans-serif;
+      color: black;
+    }
+
+    .nav-button {
+      position: absolute;
+      font-weight: bold;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
+    }
+
+    .top-left { top: 20px; left: 20px; }
+    .top-right { top: 20px; right: 20px; }
+    .bottom-left { bottom: 20px; left: 20px; }
+    .bottom-right { bottom: 20px; right: 20px; }
+
+    .page-content {
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      min-height: 100vh;
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h1 {
+      font-size: 2em;
+    }
+
+    h3 {
+      margin-bottom: 0;
+      font-weight: bold;
+    }
+
+    p {
+      margin-top: 0.2em;
+      font-size: 0.95em;
+    }
+
+    .columns {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    a.article-link {
+      display: block;
+      margin-bottom: 10px;
+      color: blue;
+      text-decoration: none;
+    }
+
+    .contact-info {
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <div class="nav-button top-left" onclick="showPage('about')">Abdallah Jeradi</div>
+  <div class="nav-button top-right" onclick="showPage('articles')">My Articles</div>
+  <div class="nav-button bottom-left" onclick="showPage('works')">My Works</div>
+  <div class="nav-button bottom-right" onclick="showPage('contact')">My Contacts</div>
+
+  <!-- ABOUT PAGE -->
+  <div id="about" class="page-content">
+    <h1>ABOUT ME</h1>
+    <p>I’m Abdallah Jeradi, born in Gabes in 2002, where growing up around pollution sparked both my curiosity and my need to create. From building science projects to making films, writing, and speaking out, I’ve always looked for ways to connect intellegence with self expression.</p>
+
+    <h1>my education</h1>
+    <h3>Primary school</h3>
+    <p>at ther age of six as any normal kid abdullah attended his primary school and started his basic eduaction in Alhidya Gabes.</p>
+
+    <h3>Secondary school</h3>
+    <p>as any normal kid at his first years Abdullah attended ben atiya secondary where he started his journey with true science clubs.</p>
+
+    <h3>high school</h3>
+    <p>here where things changed after middle school , the student got a lot of science in his bag of knowledge , Abdullah became capable of producing new solutions and he started applying them in real life</p>
+
+    <h3>Preparatory school</h3>
+    <p>officially joined the biology geology department of the preparatory school of gabes , this field of study touches all aspects of biological sciences from cellular biology to microbiology , it also involves studying geoscience ; Prep school gives you the ability to continue up your studies in higher forms , it's the simple short cut of a bachelor degree.</p>
+
+    <h3>Engineering School</h3>
+    <p>After completing my preparatory studies, I was accepted into ESAMo, where I’m currently finishing my engineering degree in agriculture with a specialization in crop production.</p>
+
+    <h1>Proffessional Position</h1>
+    <p>currently working with</p>
+  </div>
+
+  <!-- ARTICLES PAGE -->
+  <div id="articles" class="page-content">
+    <h1>My Articles</h1>
+    <div class="columns">
+      <div class="column">
+        <a class="article-link" href="#">Prey</a>
+        <a class="article-link" href="#">Dhoop</a>
+        <a class="article-link" href="#">Transtyx</a>
+        <a class="article-link" href="#">A stroll B</a>
+        <a class="article-link" href="#">El Gort</a>
+        <a class="article-link" href="#">The Valley</a>
+        <a class="article-link" href="#">The Holy Mountain</a>
+        <a class="article-link" href="#">Hackers Of The Borders</a>
+        <a class="article-link" href="#">Grizzly Man</a>
+        <a class="article-link" href="#">Holy Motors</a>
+      </div>
+      <div class="column">
+        <a class="article-link" href="#">Castic 2019</a>
+        <a class="article-link" href="#">Filming Schools ?</a>
+        <a class="article-link" href="#">Techno 2022</a>
+        <a class="article-link" href="#">GCFenn</a>
+        <a class="article-link" href="#">JCC !</a>
+      </div>
+      <div class="column">
+        <a class="article-link" href="#">Life interpretations By one Teenager</a>
+        <a class="article-link" href="#">Iranian Tunisian Upcoming Film Analogy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKS PAGE -->
+  <div id="works" class="page-content">
+    <h1>My Works</h1>
+    <ul>
+      <li><a class="article-link" href="#">Nippers On hells borders</a></li>
+      <li><a class="https://drive.google.com/file/d/1C5AHxery32y5AY72AUMISouqlwDNadjn/view?usp=drive_link" href="#">Diogenes Met A Cop</a></li>
+      <li><a class="https://drive.google.com/file/d/1AzPAMORsnWlgaS7W7uELTq1-oy2mCa8U/view?usp=drive_link" href="#">Tgofft 2</a></li>
+      <li><a class="article-link" href="#">Jahbad Virus 2</a></li>
+    </ul>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="contact" class="page-content contact-info">
+    <p>EMAIL : abdallahjeradi@gmail.com</p>
+    <p>PHONE NUMBER : +216 29 018 590</p>
+    <p>WHATSAPP : +216 58 299 303</p>
+  </div>
+
+  <!-- SCRIPT TO TOGGLE PAGES -->
+  <script>
+    function showPage(id) {
+      const sections = document.querySelectorAll('.page-content');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>
