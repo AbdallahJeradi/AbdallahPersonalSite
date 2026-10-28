@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article — Abdallah Jeradi</title>
+  <link rel="stylesheet" href="article.css" />
+</head>
+<body>
+  <!--
+    Shows one of the PDF articles (stored on Google Drive) inside the site.
+    Used until each article gets its own page like carthage-film-fest.html.
+    The link from index.html looks like:  read.html?title=Prey&doc=DRIVE_LINK
+  -->
+  <div class="back-wrap"><a class="back" href="index.html#articles">← Back to articles</a></div>
+
+  <article class="sheet">
+    <div class="frame"></div>
+
+    <header class="head">
+      <span class="date"></span>
+      <span class="author">A.Jeradi</span>
+      <span class="logo">The <em>film</em> Article</span>
+    </header>
+
+    <section class="panel">
+      <h1 class="cover-title" id="title" style="font-size: clamp(40px, 8vw, 84px);"></h1>
+      <div id="doc"></div>
+    </section>
+  </article>
+
+  <div class="foot">www.abdallahjerdi.tn</div>
+
+  <script src="media.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const title = params.get('title') || 'Article';
+    document.getElementById('title').textContent = title;
+    document.title = title + ' — Abdallah Jeradi';
+    document.getElementById('doc').appendChild(
+      buildPlayer(params.get('doc'), { pdf: true, hideLink: true })
+    );
+  </script>
+</body>
+</html>

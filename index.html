@@ -4,169 +4,356 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abdallah Jeradi</title>
+  <link rel="stylesheet" href="article.css" />
   <style>
+    /* ----- home screen: plain black, only the four corners ----- */
     body {
-      margin: 0;
-      padding: 0;
-      background-image: url('backg.jpg');
-      background-size: cover;
-      background-position: center;
-      font-family: sans-serif;
-      color: black;
-    }
-
-    .nav-button {
-      position: absolute;
-      font-weight: bold;
-      padding: 10px;
-      text-decoration: none;
-      color: black;
-      cursor: pointer;
-    }
-
-    .top-left { top: 20px; left: 20px; }
-    .top-right { top: 20px; right: 20px; }
-    .bottom-left { bottom: 20px; left: 20px; }
-    .bottom-right { bottom: 20px; right: 20px; }
-
-    .page-content {
-      padding: 40px;
-      background: rgba(255, 255, 255, 0.9);
       min-height: 100vh;
-      display: none;
+      background: var(--bg);
+      padding: 0;
     }
 
-    .active {
-      display: block;
+    /* ----- the four corner buttons ----- */
+    .nav-button {
+      position: fixed;
+      z-index: 10;
+      padding: 10px 14px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
     }
+    .nav-button:hover,
+    .nav-button.current { background: var(--ink); color: var(--bg); }
+    .top-left     { top: 16px; left: 16px; }
+    .top-right    { top: 16px; right: 16px; }
+    .bottom-left  { bottom: 16px; left: 16px; }
+    .bottom-right { bottom: 16px; right: 16px; }
 
-    h1 {
-      font-size: 2em;
+    /* ----- pages ----- */
+    .page-content { display: none; padding: 70px 16px 90px; }
+    .page-content.active { display: block; }
+    .page-content .sheet { margin-top: 0; }
+
+    /* About */
+    .about-intro { margin-bottom: 64px; }
+    .timeline h3.sub { margin-top: 40px; }
+    .timeline h3.sub + p.light { font-size: clamp(15px, 1.8vw, 19px); }
+
+    /* Article lists */
+    .article-list {
+      list-style: none;
+      margin: 0 0 72px;
+      padding: 0;
+      columns: 2;
+      column-gap: 48px;
     }
-
-    h3 {
-      margin-bottom: 0;
-      font-weight: bold;
-    }
-
-    p {
-      margin-top: 0.2em;
-      font-size: 0.95em;
-    }
-
-    .columns {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .column {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    a.article-link {
-      display: block;
-      margin-bottom: 10px;
-      color: blue;
+    .article-list li { break-inside: avoid; margin-bottom: 18px; }
+    .article-list a {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(16px, 2vw, 20px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       text-decoration: none;
+      color: var(--ink);
+    }
+    .article-list a:hover { color: var(--muted); }
+    .article-list a.ar-title {
+      font-family: 'Amiri', serif;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      font-size: clamp(19px, 2.3vw, 24px);
     }
 
-    .contact-info {
-      font-size: 0.9em;
+    .elsewhere { margin-bottom: 36px; }
+    .elsewhere a {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(16px, 2vw, 20px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .elsewhere a:hover { color: var(--muted); }
+    .elsewhere p.light { font-size: clamp(15px, 1.8vw, 18px); margin: 8px 0 0; }
+
+    /* Works */
+    .work { margin-bottom: 40px; }
+    .work h2.sec { margin-bottom: 14px; }
+    .work p.light { font-size: clamp(15px, 1.8vw, 19px); margin: 0 0 22px; }
+
+    /* Contacts */
+    .contact-line { margin: 0 0 34px; }
+    .contact-line .label {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .contact-line a {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(18px, 2.6vw, 28px);
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      text-decoration: none;
+      word-break: break-word;
+    }
+    .contact-line a:hover { color: var(--muted); }
+
+    @media (max-width: 640px) {
+      .nav-button { font-size: 10px; letter-spacing: 0.14em; padding: 8px 10px; }
+      .article-list { columns: 1; }
     }
   </style>
 </head>
 <body>
   <!-- Navigation -->
-  <div class="nav-button top-left" onclick="showPage('about')">Abdallah Jeradi</div>
-  <div class="nav-button top-right" onclick="showPage('articles')">My Articles</div>
-  <div class="nav-button bottom-left" onclick="showPage('works')">My Works</div>
-  <div class="nav-button bottom-right" onclick="showPage('contact')">My Contacts</div>
+  <div class="nav-button top-left" data-page="about">Abdallah Jeradi</div>
+  <div class="nav-button top-right" data-page="articles">My Articles</div>
+  <div class="nav-button bottom-left" data-page="works">My Works</div>
+  <div class="nav-button bottom-right" data-page="contact">My Contacts</div>
 
-  <!-- ABOUT PAGE -->
+  <!-- ================= ABOUT ================= -->
   <div id="about" class="page-content">
-    <h1>ABOUT ME</h1>
-    <p>I’m Abdallah Jeradi, born in Gabes in 2002, where growing up around pollution sparked both my curiosity and my need to create. From building science projects to making films, writing, and speaking out, I’ve always looked for ways to connect intellegence with self expression.</p>
+    <article class="sheet">
+      <div class="frame"></div>
+      <header class="head">
+        <span class="date">About</span>
+        <span class="author">A.Jeradi</span>
+        <span class="logo">Abdallah <em>Jeradi</em></span>
+      </header>
 
-    <h1>my education</h1>
-    <h3>Primary school</h3>
-    <p>at ther age of six as any normal kid abdullah attended his primary school and started his basic eduaction in Alhidya Gabes.</p>
+      <section class="panel about-intro">
+        <h2 class="sec">About me</h2>
+        <p class="light">I’m Abdallah Jeradi, born in Gabes in 2002, where growing up around pollution sparked both my curiosity and my need to create. From building science projects to making films, writing, and speaking out, I’ve always looked for ways to connect intellegence with self expression.</p>
+      </section>
 
-    <h3>Secondary school</h3>
-    <p>as any normal kid at his first years Abdullah attended ben atiya secondary where he started his journey with true science clubs.</p>
+      <section class="panel timeline">
+        <h2 class="sec">My education</h2>
 
-    <h3>high school</h3>
-    <p>here where things changed after middle school , the student got a lot of science in his bag of knowledge , Abdullah became capable of producing new solutions and he started applying them in real life</p>
+        <h3 class="sub">Primary school</h3>
+        <p class="light">at ther age of six as any normal kid abdullah attended his primary school and started his basic eduaction in Alhidya Gabes.</p>
 
-    <h3>Preparatory school</h3>
-    <p>officially joined the biology geology department of the preparatory school of gabes , this field of study touches all aspects of biological sciences from cellular biology to microbiology , it also involves studying geoscience ; Prep school gives you the ability to continue up your studies in higher forms , it's the simple short cut of a bachelor degree.</p>
+        <h3 class="sub">Secondary school</h3>
+        <p class="light">as any normal kid at his first years Abdullah attended ben atiya secondary where he started his journey with true science clubs.</p>
 
-    <h3>Engineering School</h3>
-    <p>After completing my preparatory studies, I was accepted into ESAMo, where I’m currently finishing my engineering degree in agriculture with a specialization in crop production.</p>
+        <h3 class="sub">High school</h3>
+        <p class="light">here where things changed after middle school , the student got a lot of science in his bag of knowledge , Abdullah became capable of producing new solutions and he started applying them in real life</p>
 
-    <h1>Proffessional Position</h1>
-    <p>currently working with</p>
+        <h3 class="sub">Preparatory school</h3>
+        <p class="light">officially joined the biology geology department of the preparatory school of gabes , this field of study touches all aspects of biological sciences from cellular biology to microbiology , it also involves studying geoscience ; Prep school gives you the ability to continue up your studies in higher forms , it's the simple short cut of a bachelor degree.</p>
+
+        <h3 class="sub">Engineering school</h3>
+        <p class="light">After completing my preparatory studies, I was accepted into ESAMo, where I’m currently finishing my engineering degree in agriculture with a specialization in crop production.</p>
+      </section>
+
+      <section class="panel">
+        <h2 class="sec">Proffessional position</h2>
+        <p class="light">currently working with</p>
+      </section>
+    </article>
   </div>
 
-  <!-- ARTICLES PAGE -->
+  <!-- ================= ARTICLES ================= -->
   <div id="articles" class="page-content">
-    <h1>My Articles</h1>
-    <div class="columns">
-      <div class="column">
-        <a class="article-link" href="https://drive.google.com/file/d/1C4Udg_ym6k6ARYcMgpeU027fcH4dBfqv/view?usp=sharing">Park Farhoud</a>
-        <a class="article-link" href="https://drive.google.com/file/d/1IyJzYd31rPuKrBmEjp2SF1bq-4EufXnc/view?usp=sharing">Prey</a>
-        <a class="article-link" href="https://drive.google.com/file/d/1vx9l7iSJEokelyMRHG53rC9do44GPoVn/view?usp=sharing">Dhoop</a>
-        <a class="article-link" href="https://drive.google.com/file/d/1opJWsQT_OS_GEcbO9ZA9Sxcv3YmaQZGE/view?usp=sharing">Transtyx</a>
-        <a class="article-link" href="https://drive.google.com/file/d/12BQx-csfW2iyO7sbhJIOWxTfayAuiLFS/view?usp=sharing">A stroll B</a>
-        <a class="article-link" href="https://drive.google.com/file/d/1fDkbLLhA6sWGzNrq0tJiAPECpthJZUi3/view?usp=sharing">El Gort</a>
-        <a class="article-link" href="#">The Valley</a>
-        <a class="article-link" href="#">The Holy Mountain</a>
-        <a class="article-link" href="#">Hackers Of The Borders</a>
-        <a class="article-link" href="https://drive.google.com/file/d/1WpQsoaPhCEnSIrEtOLDXgLrQW7TTaVx_/view?usp=sharing">Grizzly Man</a>
-        <a class="article-link" href="#">Holy Motors</a>
+    <article class="sheet">
+      <div class="frame"></div>
+      <header class="head">
+        <span class="date">Articles</span>
+        <span class="author">A.Jeradi</span>
+        <span class="logo">The <em>film</em> Article</span>
+      </header>
+
+      <h2 class="sec">My articles</h2>
+      <!-- These open a page on this site -->
+      <ul class="article-list">
+        <li><a href="carthage-film-fest.html">Carthage Film Fest</a></li>
+        <li><a class="ar-title" href="saltaqi-habibati.html">سألتقي حبيبتي في القمامة</a></li>
+        <li><a href="read.html?title=Park%20Farhoud&doc=https://drive.google.com/file/d/1C4Udg_ym6k6ARYcMgpeU027fcH4dBfqv/view">Park Farhoud</a></li>
+        <li><a href="read.html?title=Prey&doc=https://drive.google.com/file/d/1IyJzYd31rPuKrBmEjp2SF1bq-4EufXnc/view">Prey</a></li>
+        <li><a href="read.html?title=Dhoop&doc=https://drive.google.com/file/d/1vx9l7iSJEokelyMRHG53rC9do44GPoVn/view">Dhoop</a></li>
+        <li><a href="read.html?title=Transtyx&doc=https://drive.google.com/file/d/1opJWsQT_OS_GEcbO9ZA9Sxcv3YmaQZGE/view">Transtyx</a></li>
+        <li><a href="read.html?title=A%20stroll%20B&doc=https://drive.google.com/file/d/12BQx-csfW2iyO7sbhJIOWxTfayAuiLFS/view">A stroll B</a></li>
+        <li><a href="read.html?title=El%20Gort&doc=https://drive.google.com/file/d/1fDkbLLhA6sWGzNrq0tJiAPECpthJZUi3/view">El Gort</a></li>
+        <li><a href="read.html?title=Grizzly%20Man&doc=https://drive.google.com/file/d/1WpQsoaPhCEnSIrEtOLDXgLrQW7TTaVx_/view">Grizzly Man</a></li>
+        <li><a href="castic-2019.html">Castic 2019</a></li>
+        <li><a href="techno-2022.html">Techno 2022</a></li>
+      </ul>
+
+      <!-- These open another website.
+           ✏️ To add one, copy a whole <div class="elsewhere"> ... </div> block and change it. -->
+      <h2 class="sec">Published elsewhere</h2>
+
+      <div class="elsewhere">
+        <a href="https://echoscinema.org/revues/atelier-decriture-sur-les-films-primes-aux-jcc/" target="_blank" rel="noopener">JCC ! ↗</a>
+        <p class="light">Films we saw at the Carthage Film Festival (JCC) and wrote about with the Echos collective, in their writing workshop on the award-winning films.</p>
       </div>
-      <div class="column">
-        <a class="article-link" href="#">Castic 2019</a>
-        <a class="article-link" href="#">Filming Schools ?</a>
-        <a class="article-link" href="https://www.youtube.com/playlist?list=PLZQHsVTX3S1rB9ks2TQOAll6GU03fpVbh">Techno 2022</a>
-        <a class="article-link" href="#">GCFenn</a>
-        <a class="article-link" href="https://echoscinema.org/revues/atelier-decriture-sur-les-films-primes-aux-jcc/">JCC !</a>
+
+      <div class="elsewhere">
+        <a href="https://echoscinema.org/revues/fifak2026/job-opportunity-abdallah-jradi-ar/" target="_blank" rel="noopener">Job Opportunity ↗</a>
+        <p class="light">A film we saw at FIFAK 2026 and wrote about with the Echos collective.</p>
       </div>
-      <div class="column">
-        <a class="article-link" href="#">Life interpretations By one Teenager</a>
-        <a class="article-link" href="#">Iranian Tunisian Upcoming Film Analogy</a>
+
+      <div class="elsewhere">
+        <a href="https://echoscinema.org/revues/what-is-a-documentary-youd-watch-while-going-to-sleep-but-wont-forget/" target="_blank" rel="noopener">What is a documentary you’d watch while going to sleep but won’t forget ↗</a>
+        <p class="light">A documentary we saw and wrote about with the Echos collective.<!-- ✏️ add the festival name: "we saw at ... and wrote" --></p>
       </div>
-    </div>
+
+      <div class="elsewhere" dir="rtl">
+        <a class="ar" style="text-transform: none; letter-spacing: 0; font-family: 'Amiri', serif;" href="https://echoscinema.org/non-classe/%d8%ad%d9%88%d8%a7%d8%b1-%d8%ad%d9%88%d9%84-%d8%a7%d9%84%d8%b7%d9%85%d8%a7%d8%b7%d9%85%d8%8c-%d8%af%d9%88%d9%86-%d9%85%d8%b1%d8%ac%d8%b9%d9%8a%d8%a7%d8%aa-%d8%a3%d9%88-%d9%87%d8%b0%d8%a7-%d9%85/" target="_blank" rel="noopener">حوار حول الطماطم، دون مرجعيات ↗</a>
+        <p class="light" dir="ltr">A film we saw and wrote about with the Echos collective.<!-- ✏️ add the festival name: "we saw at ... and wrote" --></p>
+      </div>
+
+      <div class="elsewhere" dir="rtl">
+        <a class="ar" style="text-transform: none; letter-spacing: 0; font-family: 'Amiri', serif;" href="https://echoscinema.org/revues/%d8%aa%d8%b0%d9%83%d9%91%d8%b1%d8%aa%d9%83%d9%90-%d9%88%d8%a3%d9%86%d8%a7-%d8%a3%d8%b4%d8%a7%d9%87%d8%af-%d8%ad%d8%a8%d9%84-%d8%a7%d9%84%d8%b3%d9%91%d8%b1%d9%91%d8%a9-%d9%81%d8%b7%d9%8e%d9%85/" target="_blank" rel="noopener">تذكّرتكِ وأنا أشاهد حبل السّرّة ↗</a>
+        <p class="light" dir="ltr">A film we saw and wrote about with the Echos collective.<!-- ✏️ add the festival name: "we saw at ... and wrote" --></p>
+      </div>
+
+      <div class="elsewhere" dir="rtl">
+        <a class="ar" style="text-transform: none; letter-spacing: 0; font-family: 'Amiri', serif;" href="https://echoscinema.org/revues/%d9%87%d9%84-%d9%83%d8%a7%d9%86-%d8%aa%d8%a7%d8%b1%d9%83%d9%88%d9%81%d8%b3%d9%83%d9%8a-%d8%b3%d9%8a%d9%8f%d8%b9%d8%ac%d9%8e%d8%a8-%d8%a8%d9%81%d9%8a%d9%84%d9%85-%d8%a5%d8%b1%d8%ab-%d8%9f-%d8%b9/" target="_blank" rel="noopener">هل كان تاركوفسكي سيُعجَب بفيلم إرث ؟ ↗</a>
+        <p class="light" dir="ltr">A film we saw and wrote about with the Echos collective.<!-- ✏️ add the festival name: "we saw at ... and wrote" --></p>
+      </div>
+    </article>
   </div>
 
-  <!-- WORKS PAGE -->
+  <!-- ================= WORKS (filled from the list in the script below) ================= -->
   <div id="works" class="page-content">
-    <h1>My Works</h1>
-    <ul>
-      <li><a class="article-link" href="https://youtu.be/9T0lmGKB4GY?si=KANkC88-OnGRx31h">Nippers On hells borders</a></li>
-      <li><a class="article-link" href="https://drive.google.com/file/d/1C5AHxery32y5AY72AUMISouqlwDNadjn/view?usp=drive_link">Diogenes Met A Cop</a></li>
-      <li><a class="article-link" href="https://drive.google.com/file/d/1AzPAMORsnWlgaS7W7uELTq1-oy2mCa8U/view?usp=drive_link">Tgofft 2</a></li>
-      <li><a class="article-link" href="https://youtu.be/y4bsPA53Gu0?si=9NeTHpJ5Wfh7y0hL">Jahbad Virus 2</a></li>
-    </ul>
+    <article class="sheet">
+      <div class="frame"></div>
+      <header class="head">
+        <span class="date">Works</span>
+        <span class="author">A.Jeradi</span>
+        <span class="logo">Abdallah <em>Jeradi</em></span>
+      </header>
+      <div id="works-list"></div>
+    </article>
   </div>
 
-  <!-- CONTACT PAGE -->
-  <div id="contact" class="page-content contact-info">
-    <p>EMAIL : abdallahjeradi@gmail.com</p>
-    <p>PHONE NUMBER : +216 29 018 590</p>
-    <p>WHATSAPP : +216 58 299 303</p>
+  <!-- ================= CONTACTS ================= -->
+  <div id="contact" class="page-content">
+    <article class="sheet">
+      <div class="frame"></div>
+      <header class="head">
+        <span class="date">Contacts</span>
+        <span class="author">A.Jeradi</span>
+        <span class="logo">Abdallah <em>Jeradi</em></span>
+      </header>
+
+      <h2 class="sec">My contacts</h2>
+      <p class="contact-line"><span class="label">Email</span><a href="mailto:abdallahjeradi@gmail.com">abdallahjeradi@gmail.com</a></p>
+      <p class="contact-line"><span class="label">Phone number</span><a href="tel:+21629018590">+216 29 018 590</a></p>
+      <p class="contact-line"><span class="label">WhatsApp</span><a href="https://wa.me/21658299303" target="_blank" rel="noopener">+216 58 299 303</a></p>
+    </article>
   </div>
 
-  <!-- SCRIPT TO TOGGLE PAGES -->
+  <script src="media.js"></script>
   <script>
+    /* =====================================================
+       ✏️ MY WORKS — edit this list.
+       For each work: a title, a short description, and EITHER
+       - link:  a YouTube / Google Drive link → a video player is made
+       - page:  a page of this site (+ optional image) → a button to it
+       ===================================================== */
+    const works = [
+      {
+        title: 'Life Interpretations of a Teenager',
+        description: 'This is a small book i have written on my phones note app as a memory of my last years as a teenger, it resembels my experiences, my philosophy and my ideology back than, multiple ideas that have been heavily influenced by my life and what occured in this short span, i keep it here as an archival page, the book have been reviewed and corrected linguisticaly by multiple friends but i remains as an essential piece of my life and existence .',
+        page: 'life-interpretations.html',
+        button: 'Read the book'
+      },
+      {
+        title: 'Drunk in Atlantis',
+        description: 'along side the book i made a funny adolescent film called drunk in atlantis, a film that tries to convey what words failed to present in my book, a very conceptual poorely made film that serves as visual representation of what a kid would feel in a dystopian city.',
+        link: ''   // ✏️ paste the Drunk in Atlantis link here
+      },
+      {
+        title: 'Mouhit — Bees Fly South',
+        description: 'at mouhit residency i spent three months working on a video installation, reaserching about bees authority and politics and how can we create a steady system learning from them, than i presented my work alongside a zine you still can get from me personally.',
+        page: 'mouhit.html',
+        image: 'img/mouhit/mouhit-08.jpg',
+        button: 'See the installation'
+      },
+      {
+        title: 'Nippers On hells borders',
+        description: 'Another Visual represnation i coproduced with my friend in Gabes, a small collective of little kids wonder around places in hidonistic way.',
+        link: 'https://youtu.be/9T0lmGKB4GY'
+      },
+      {
+        title: 'Jahbad Virus 2',
+        description: 'A visual oveur where i represnet the life of a vunrable individual thro out my lens, i ask multiple questions and they remain unanswered.',
+        link: 'https://youtu.be/y4bsPA53Gu0'
+      },
+      {
+        title: 'Diogenes Met A Cop',
+        description: 'A film i presented for the fifak some years ag that shows my experience with science and stray dogs.',
+        link: 'https://drive.google.com/file/d/1C5AHxery32y5AY72AUMISouqlwDNadjn/view'
+      }
+    ];
+
+    const list = document.getElementById('works-list');
+    works.forEach(w => {
+      const block = document.createElement('section');
+      block.className = 'work';
+
+      const h = document.createElement('h2');
+      h.className = 'sec';
+      h.textContent = w.title;
+      const p = document.createElement('p');
+      p.className = 'light';
+      p.textContent = w.description;
+      block.appendChild(h);
+      block.appendChild(p);
+
+      if (w.page) {
+        if (w.image) {
+          const a = document.createElement('a');
+          a.href = w.page;
+          const img = document.createElement('img');
+          img.src = w.image;
+          img.alt = w.title;
+          img.className = 'photo';
+          img.style.marginBottom = '18px';
+          a.appendChild(img);
+          block.appendChild(a);
+        }
+        const btn = document.createElement('a');
+        btn.className = 'more';
+        btn.href = w.page;
+        btn.textContent = w.button || 'See more';
+        block.appendChild(btn);
+      } else {
+        block.appendChild(buildPlayer(w.link));
+      }
+      list.appendChild(block);
+    });
+
+    /* ----- switch between the four pages ----- */
     function showPage(id) {
-      const sections = document.querySelectorAll('.page-content');
-      sections.forEach(section => section.classList.remove('active'));
+      document.querySelectorAll('.page-content').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-button').forEach(b => b.classList.toggle('current', b.dataset.page === id));
       document.getElementById(id).classList.add('active');
+      document.body.classList.add('page-open');
+      window.scrollTo(0, 0);
     }
+    document.querySelectorAll('.nav-button').forEach(b =>
+      b.addEventListener('click', () => showPage(b.dataset.page))
+    );
+
+    /* "Back to articles" on article pages comes here as index.html#articles */
+    const start = location.hash.replace('#', '');
+    if (start && document.getElementById(start)) showPage(start);
   </script>
 </body>
 </html>
-

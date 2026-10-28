@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Techno 2022 — Abdallah Jeradi</title>
+  <link rel="stylesheet" href="article.css" />
+</head>
+<body>
+  <div class="back-wrap"><a class="back" href="index.html#articles">← Back to articles</a></div>
+
+  <article class="sheet">
+    <div class="frame"></div>
+
+    <header class="head">
+      <span class="date">2022</span>
+      <span class="author">A.Jeradi</span>
+      <span class="logo">The <em>film</em> Article</span>
+    </header>
+
+    <section class="panel">
+      <h1 class="cover-title" style="font-size: clamp(44px, 9vw, 92px); margin-bottom: 36px;">Techno 2022</h1>
+
+      <p class="light">i have zero knowledge about music, but i fuck around and try to find out, this is what i came out with.</p>
+    </section>
+
+    <section class="panel" id="videos"></section>
+  </article>
+
+  <div class="foot">www.abdallahjerdi.tn</div>
+
+  <script src="media.js"></script>
+  <script>
+    /* ✏️ PASTE YOUR 3 YOUTUBE LINKS BETWEEN THE QUOTES */
+    const videos = [
+      '',   // video 1
+      '',   // video 2
+      ''    // video 3
+    ];
+
+    const box = document.getElementById('videos');
+    videos.forEach(link => box.appendChild(buildPlayer(link)));
+  </script>
+</body>
+</html>
